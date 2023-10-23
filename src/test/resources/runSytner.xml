@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Sytner - User">
+    <listeners>
+        <listener class-name="commons.MethodListener"/>
+        <listener class-name="reportConfigs.AllureTestListener"/>
+    </listeners>
+    <test name="Run on CHROME">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="com.sytner.user.User_01_Menu_Items"/>
+        </classes>
+    </test>
+</suite>
