@@ -1,0 +1,3 @@
+# Hybrid framework for automation testing
+Site: https://www.sytner.co.uk <br/>
+Tech: Maven - Java 11, Selenium 4, TestNG, Allure report, log4j, POM,...
