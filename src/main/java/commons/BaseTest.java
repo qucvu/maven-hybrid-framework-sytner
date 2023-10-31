@@ -2,6 +2,7 @@ package commons;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.Description;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -200,6 +201,7 @@ public class BaseTest {
         return pass;
     }
 
+    @Step("Verify current value vs expected value: {0} -  {1} ")
     protected boolean verifyEquals(Object actual, Object expected) {
         boolean pass = true;
         try {
