@@ -34,6 +34,10 @@ public class PageGeneratorManager {
         return new UserFinancePO(driver);
     }
 
+    @Step("Initialize User Search Car Page")
+    public static UserSearchCarPO getUserSearchCarPage(WebDriver driver){
+        return new UserSearchCarPO(driver);
+    }
 
 
 }

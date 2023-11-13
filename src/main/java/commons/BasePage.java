@@ -8,6 +8,8 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import pageObjects.sytner.user.UserHomePO;
+import pageObjects.sytner.user.UserSearchCarPO;
 import pageUIs.sytner.SytnerBasePageUI;
 
 import java.io.File;
@@ -756,5 +758,19 @@ public class BasePage {
     public String getCurrentTitlePage() {
         waitForElementVisibility(SytnerBasePageUI.CURRENT_TITLE_PAGE);
         return getElementText(SytnerBasePageUI.CURRENT_TITLE_PAGE);
+    }
+
+    @Step("Click to Logo link at Header navigation")
+    public UserHomePO clickToLogoLinkAtHeaderNav() {
+        waitForElementClickable(SytnerBasePageUI.SYTNER_LOGO_LINK_HEADER_NAV);
+        clickToElement(SytnerBasePageUI.SYTNER_LOGO_LINK_HEADER_NAV);
+        return PageGeneratorManager.getUserHomePage(driver);
+    }
+
+    @Step("Click to Search button")
+    public UserSearchCarPO clickToSearchButtonAtBanner() {
+        waitForElementClickable(SytnerBasePageUI.SEARCH_BUTTON_AT_BANNER);
+        clickToElement(SytnerBasePageUI.SEARCH_BUTTON_AT_BANNER);
+        return PageGeneratorManager.getUserSearchCarPage(driver);
     }
 }

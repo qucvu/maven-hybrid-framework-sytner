@@ -7,6 +7,7 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.devtools.v85.page.Page;
 import org.testng.annotations.AfterClass;
@@ -15,15 +16,15 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import pageObjects.sytner.user.*;
 
-@Feature("New User")
-public class User_01_Menu_Items extends BaseTest {
+@Feature("Menu items")
+        public class User_01_Menu_Items extends BaseTest {
 
-    @Parameters("browser")
-    @BeforeClass
-    public void beforeClass(String browserName) {
-        log.info("Pre-conditions - Step 01: Open User Site");
-        driver = getBrowserDriver(browserName, GlobalConstants.END_USER_URL);
-        homePage = PageGeneratorManager.getUserHomePage(driver);
+            @Parameters("browser")
+            @BeforeClass
+            public void beforeClass(String browserName) {
+                log.info("Pre-conditions - Step 01: Open User Site");
+                driver = getBrowserDriver(browserName, GlobalConstants.END_USER_URL);
+                homePage = PageGeneratorManager.getUserHomePage(driver);
 
         log.info("Pre-conditions - Step 02: Click to 'Accept all cookie' option if show ");
         homePage.clickToAcceptAllCookiePopup();
@@ -86,13 +87,29 @@ public class User_01_Menu_Items extends BaseTest {
 
     }
 
+    @Test
+    public void Menu_06_Sytner_GroupLogo(){
+        homePage = financePage.clickToLogoLinkAtHeaderNav();
+        verifyEquals(homePage.getCurrentUrl(), "https://www.sytner.co.uk/");
+    }
+
+
+    @Test
+    public void Menu_07_Search_Car_Page(){
+        searchCarPage = homePage.clickToSearchButtonAtBanner();
+        verifyEquals(searchCarPage.getCurrentUrl(), "https://www.sytner.co.uk/search");
+
+    }
+
+
+
 
 
 
 
     @AfterClass(alwaysRun = true)
     public void afterClass() {
-//        closeBrowserDriver();
+        closeBrowserDriver();
     }
 
     private WebDriver driver;
@@ -102,6 +119,7 @@ public class User_01_Menu_Items extends BaseTest {
     private UserCustomerServicePO customerServicePage;
     private UserCareerPO careerPage;
     private UserFinancePO financePage;
+    private UserSearchCarPO searchCarPage;
 
 
 }
