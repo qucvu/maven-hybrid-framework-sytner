@@ -6,7 +6,7 @@
         <listener class-name="reportConfigs.AllureTestListener"/>
     </listeners>
     <test name="Run on CHROME">
-        <parameter name="browser" value="chrome"/>
+        <parameter name="browser" value="firefox"/>
         <classes>
             <class name="com.sytner.user.User_01_Menu_Items"/>
         </classes>

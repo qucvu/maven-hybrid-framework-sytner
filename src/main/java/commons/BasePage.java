@@ -1,5 +1,6 @@
 package commons;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.Color;
@@ -7,7 +8,9 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import pageUIs.sytner.BankGuruBasePageUI;
+import pageObjects.sytner.user.UserHomePO;
+import pageObjects.sytner.user.UserSearchCarPO;
+import pageUIs.sytner.SytnerBasePageUI;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -640,8 +643,8 @@ public class BasePage {
      * @param value  text value
      */
     public void inputToTextboxById(String textID, String value) {
-        waitForElementVisibility(BankGuruBasePageUI.DYNAMIC_TEXTBOX_BY_ID, textID);
-        sendKeyToElement(BankGuruBasePageUI.DYNAMIC_TEXTBOX_BY_ID, value, textID);
+        waitForElementVisibility(SytnerBasePageUI.DYNAMIC_TEXTBOX_BY_ID, textID);
+        sendKeyToElement(SytnerBasePageUI.DYNAMIC_TEXTBOX_BY_ID, value, textID);
     }
 
     protected void deleteFileByFilePath(String filePath) {
@@ -701,19 +704,73 @@ public class BasePage {
 
 
     public String getValueTextboxById(String id) {
-        waitForElementVisibility(BankGuruBasePageUI.DYNAMIC_TEXTBOX_BY_ID, id);
-        return getElementAttribute("value", BankGuruBasePageUI.DYNAMIC_TEXTBOX_BY_ID, id);
+        waitForElementVisibility(SytnerBasePageUI.DYNAMIC_TEXTBOX_BY_ID, id);
+        return getElementAttribute("value", SytnerBasePageUI.DYNAMIC_TEXTBOX_BY_ID, id);
     }
 
     public void enterToTextboxEmptyValueById(String id) {
-        waitForAllElementVisibility(BankGuruBasePageUI.DYNAMIC_TEXTBOX_BY_ID, id);
-        clearElement(BankGuruBasePageUI.DYNAMIC_TEXTBOX_BY_ID, id);
+        waitForAllElementVisibility(SytnerBasePageUI.DYNAMIC_TEXTBOX_BY_ID, id);
+        clearElement(SytnerBasePageUI.DYNAMIC_TEXTBOX_BY_ID, id);
     }
 
     public void selectToDefaultDropdownById(String Id, String textOption) {
-        waitForElementClickable(BankGuruBasePageUI.DYNAMIC_DEFAULT_DROPDOWN_BY_ID, Id);
-        selectItemInDefaultDropdown(BankGuruBasePageUI.DYNAMIC_DEFAULT_DROPDOWN_BY_ID, textOption, Id);
+        waitForElementClickable(SytnerBasePageUI.DYNAMIC_DEFAULT_DROPDOWN_BY_ID, Id);
+        selectItemInDefaultDropdown(SytnerBasePageUI.DYNAMIC_DEFAULT_DROPDOWN_BY_ID, textOption, Id);
     }
 
 
+    public void clickDynamicFooterLinkByPageName(String pageName) {
+        scrollToElement(SytnerBasePageUI.DYNAMIC_FOOTER_LINK_PAGE_NAME, pageName);
+        waitForElementClickable(SytnerBasePageUI.DYNAMIC_FOOTER_LINK_PAGE_NAME, pageName);
+        clickToElement(SytnerBasePageUI.DYNAMIC_FOOTER_LINK_PAGE_NAME, pageName);
+
+    }
+
+    @Step("Open {0} page at header menu")
+    public void clickDynamicMenuLinkByPageName(String pageName) {
+        waitForElementClickable(SytnerBasePageUI.DYNAMIC_MENU_LINK_BY_PAGE_NAME, pageName);
+        clickToElement(SytnerBasePageUI.DYNAMIC_MENU_LINK_BY_PAGE_NAME, pageName);
+    }
+
+    @Step("Open menu header")
+    public void openMenuHeader() {
+        waitForElementClickable(SytnerBasePageUI.OPEN_MENU_BUTTON);
+        clickToElement(SytnerBasePageUI.OPEN_MENU_BUTTON);
+    }
+
+
+    @Step("Close menu header")
+    public void closeMenuHeader() {
+        waitForElementClickable(SytnerBasePageUI.CLOSE_MENU_BUTTON);
+        clickToElement(SytnerBasePageUI.CLOSE_MENU_BUTTON);
+    }
+
+
+
+    @Step("Accept cookies popup")
+    public void clickToAcceptAllCookiePopup() {
+        if(!isElementUndisplayed(SytnerBasePageUI.USE_COOKIES_POPUP)){
+            waitForElementClickable(SytnerBasePageUI.ACCEPT_ALL_COOKIES_BUTTON);
+            clickToElement(SytnerBasePageUI.ACCEPT_ALL_COOKIES_BUTTON);
+        }
+    }
+
+    public String getCurrentTitlePage() {
+        waitForElementVisibility(SytnerBasePageUI.CURRENT_TITLE_PAGE);
+        return getElementText(SytnerBasePageUI.CURRENT_TITLE_PAGE);
+    }
+
+    @Step("Click to Logo link at Header navigation")
+    public UserHomePO clickToLogoLinkAtHeaderNav() {
+        waitForElementClickable(SytnerBasePageUI.SYTNER_LOGO_LINK_HEADER_NAV);
+        clickToElement(SytnerBasePageUI.SYTNER_LOGO_LINK_HEADER_NAV);
+        return PageGeneratorManager.getUserHomePage(driver);
+    }
+
+    @Step("Click to Search button")
+    public UserSearchCarPO clickToSearchButtonAtBanner() {
+        waitForElementClickable(SytnerBasePageUI.SEARCH_BUTTON_AT_BANNER);
+        clickToElement(SytnerBasePageUI.SEARCH_BUTTON_AT_BANNER);
+        return PageGeneratorManager.getUserSearchCarPage(driver);
+    }
 }
